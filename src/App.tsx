@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import { useState, useReducer } from "react";
 import reducer from './reducers/index'
+import Event from "./components/Event";
 
 const App: FC = () => {
   const [ state, dispatch] = useReducer(reducer, [])
@@ -10,7 +11,6 @@ const App: FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const addEvent = (e:any) => {
     e.preventDefault()
-    // console.log({type:"CREATE_EVENT",title,body})
     dispatch({ type: "CREATE_EVENT", title, body })
     setTitle("")
     setBody("")
@@ -22,7 +22,7 @@ const App: FC = () => {
     dispatch({ type: "DELETE_ALL_EVENT" })
   }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClickDeleteButton = (e:any) => {
     e.preventDefault()
     dispatch({ type: "DELETE_EVENT", id: e.target.value })
@@ -57,19 +57,14 @@ const App: FC = () => {
           </tr>
         </thead>
         <tbody>
-          {state.map((item) => {
-            return (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.title}</td>
-                <td>{item.body}</td>
-                <td><button className="btn btn-danger" value={item.id} onClick={(e)=>handleClickDeleteButton(e)}>削除</button></td>
-              </tr>
-            )
-          })}
+          { state.map((event, index) => (<Event key={index} event={event} handleClickDeleteButton={handleClickDeleteButton} />))}
         </tbody>
       </table>
       <h4 className="mt-4">イベント一覧の状態</h4>
+      {state.map((item,index) => 
+            <p key={index}>{`{ id: ${item.id}, title: ${item.title}, body: ${item.body} }`}</p>
+        )
+      }
     </div>
   )
 }
