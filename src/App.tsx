@@ -16,6 +16,7 @@ const App:FC = () => {
         </div>
         <button className="btn btn-primary m-2">イベントを作成する</button>
         <button className="btn btn-danger">全てのイベントを削除する</button>
+        <button className="btn btn-danger m-2">全ての操作ログを削除する</button>
       </form>
       
       <h4 className="mt-4">イベント一覧</h4>
@@ -43,6 +44,7 @@ const App:FC = () => {
           </tr>
         </tbody>
       </table>
+      <h4 className="mt-4">イベント一覧の状態</h4>
     </div>
   )
 }
