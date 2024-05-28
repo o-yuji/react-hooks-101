@@ -8,9 +8,12 @@ interface Event {
 
 interface Action {
   type: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: any;
   title?: string;
   body?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  id?: any;
 }
 
 const events: Reducer<Event[], Action> = (state = [], action) => {
@@ -26,6 +29,9 @@ const events: Reducer<Event[], Action> = (state = [], action) => {
 
     case "ADD_EVENT":
       return [...state, action.payload];
+
+    case "DELETE_EVENT":
+      return state.filter((event) => event.id !== parseInt(action.id));
 
     case "DELETE_ALL_EVENT":
       return [];
