@@ -33,7 +33,7 @@ const events: Reducer<Event[], Action> = (state = [], action) => {
     case "DELETE_EVENT":
       return state.filter((event) => event.id !== parseInt(action.id));
 
-    case "DELETE_ALL_EVENT":
+    case "DELETE_ALL_EVENTS":
       return [];
 
     default:
