@@ -1,23 +1,8 @@
 import { Reducer } from "react";
+import { EventType, ActionType } from "../types/types";
 
-interface Event {
-  title: string;
-  body: string;
-  id: number;
-}
-
-interface Action {
-  type: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload?: any;
-  title?: string;
-  body?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  id?: any;
-}
-
-const events: Reducer<Event[], Action> = (state = [], action) => {
-  let event: Event;
+const events: Reducer<EventType[], ActionType> = (state = [], action) => {
+  let event: EventType;
   switch (action.type) {
     case "CREATE_EVENT":
       event = {
@@ -33,7 +18,7 @@ const events: Reducer<Event[], Action> = (state = [], action) => {
     case "DELETE_EVENT":
       return state.filter((event) => event.id !== parseInt(action.id));
 
-    case "DELETE_ALL_EVENT":
+    case "DELETE_ALL_EVENTS":
       return [];
 
     default:
