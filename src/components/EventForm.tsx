@@ -1,21 +1,24 @@
 import { useState } from "react";
+import { EventType, ActionType} from "../types/types"
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const EventForm = ({ state,dispatch }: any) => {
+interface EventFormProps {
+    state: EventType[];
+    dispatch: React.Dispatch<ActionType>;
+}
+
+const EventForm = ({ state,dispatch }: EventFormProps) => {
 
   const [ title, setTitle] = useState("")
   const [ body, setBody] = useState("")
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const addEvent = (e:any) => {
+  const addEvent = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
     dispatch({ type: "CREATE_EVENT", title, body })
     setTitle("")
     setBody("")
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const deleteAllEvents = (e: any) => {
+  const deleteAllEvents = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
     const result: boolean = window.confirm("本当に全て削除してもいいですか？")
     if (result) {

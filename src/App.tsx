@@ -7,12 +7,11 @@ import EventForm from "./components/EventForm";
 const App: FC = () => {
   const [ state, dispatch] = useReducer(reducer, [])
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleClickDeleteButton = (e: any) => {
+  const handleClickDeleteButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     const result: boolean = window.confirm(`本当に[id=${e.target.value}]のデータを削除してもいいですか？`)
     if (result) {
-      dispatch({ type: "DELETE_EVENT", id: e.target.value })
+      dispatch({ type: "DELETE_EVENT", id: parseInt(e.target.value) })
     } else {
       return
     }
