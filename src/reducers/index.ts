@@ -1,10 +1,11 @@
 import { Reducer } from "react";
 import { EventType, ActionType } from "../types/types";
+import { CREATE_EVENT, DELETE_EVENT, DELETE_ALL_EVENT } from "../actions/index";
 
 const events: Reducer<EventType[], ActionType> = (state = [], action) => {
   let event: EventType;
   switch (action.type) {
-    case "CREATE_EVENT":
+    case CREATE_EVENT:
       event = {
         title: action.title ? action.title : "",
         body: action.body ? action.body : "",
@@ -12,13 +13,10 @@ const events: Reducer<EventType[], ActionType> = (state = [], action) => {
       };
       return [...state, event];
 
-    case "ADD_EVENT":
-      return [...state, action.payload];
+    case DELETE_EVENT:
+      return state.filter((event) => event.id !== action.id);
 
-    case "DELETE_EVENT":
-      return state.filter((event) => event.id !== parseInt(action.id));
-
-    case "DELETE_ALL_EVENTS":
+    case DELETE_ALL_EVENT:
       return [];
 
     default:

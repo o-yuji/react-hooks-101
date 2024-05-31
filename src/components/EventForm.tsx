@@ -1,19 +1,20 @@
 import { useState } from "react";
-import { EventType, ActionType} from "../types/types"
+import { EventType, ActionType } from "../types/types"
+import { CREATE_EVENT, DELETE_ALL_EVENT} from '../actions/index'
 
 interface EventFormProps {
     state: EventType[];
     dispatch: React.Dispatch<ActionType>;
 }
 
-const EventForm = ({ state,dispatch }: EventFormProps) => {
+const EventForm = ({ state, dispatch }: EventFormProps) => {
 
   const [ title, setTitle] = useState("")
   const [ body, setBody] = useState("")
 
   const addEvent = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    dispatch({ type: "CREATE_EVENT", title, body })
+    dispatch({ type: CREATE_EVENT, title, body })
     setTitle("")
     setBody("")
   }
@@ -22,13 +23,13 @@ const EventForm = ({ state,dispatch }: EventFormProps) => {
     e.preventDefault()
     const result: boolean = window.confirm("本当に全て削除してもいいですか？")
     if (result) {
-      dispatch({ type: "DELETE_ALL_EVENTS" })
+      dispatch({ type: DELETE_ALL_EVENT })
     } else {
       return
     }
   }
 
-  const unCreatable:boolean = title == "" || body == ""
+  const unCreatable: boolean = title == "" || body == ""
 
   return (
     <>
