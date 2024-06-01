@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { EventType, ActionType } from "../types/types"
-import { CREATE_EVENT, DELETE_ALL_EVENT} from '../actions/index'
+import { CREATE_EVENT, DELETE_ALL_EVENT } from '../actions/index'
+import AppContext from '../contexts/AppContext';
 
 interface EventFormProps {
     state: EventType[];
     dispatch: React.Dispatch<ActionType>;
 }
 
-const EventForm = ({ state, dispatch }: EventFormProps) => {
-
+const EventForm = () => {
+  const { state, dispatch }: EventFormProps = useContext(AppContext)
   const [ title, setTitle] = useState("")
   const [ body, setBody] = useState("")
 
