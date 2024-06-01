@@ -1,16 +1,12 @@
-import React from 'react'
-import Event from "./Event";
-import { EventType, ActionType } from '../types/types';
+import { useContext } from 'react'
+import { EventType } from "../types/types"
 
-interface EventFormProps {
-    state: EventType[];
-    dispatch: React.Dispatch<ActionType>;
-}
+import Event from './Event'
+import AppContext from '../contexts/AppContext'
 
-const Events = ({ state, dispatch }: EventFormProps) => {
-
-
-
+const Events = () => {
+    /* eslint @typescript-eslint/no-explicit-any: off */
+    const { state }:any = useContext(AppContext)
     return (
         <>
             <h4 className="mt-4">イベント一覧</h4>
@@ -23,8 +19,9 @@ const Events = ({ state, dispatch }: EventFormProps) => {
                     <th>削除</th>
                 </tr>
             </thead>
-            <tbody>
-                { state.map((event, index) => (<Event key={index} event={event} dispatch={dispatch} />))}
+                <tbody>
+                    {/* eslint @typescript-eslint/no-explicit-any: off */}
+                    { state.map((event:EventType, index:number) => (<Event key={index} event={event} />))}
             </tbody>
             </table>
         </>
